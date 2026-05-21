@@ -2,12 +2,14 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from django.db.models import Count
 from .models import Document, Chunk
 from .serializers import DocumentListSerializer, DocumentDetailSerializer, SearchResultSerializer
 
 class DocumentListView(generics.ListAPIView):
-    queryset = Document.objects.annotate(_chunk_count=Count("chunks"))
+    queryset = Document.objects.annotate(_chunk_count=Count("chunks")).order_by("-created_at")
     serializer_class = DocumentListSerializer
 
 class DocumentDetailView(generics.RetrieveAPIView):
@@ -15,6 +17,9 @@ class DocumentDetailView(generics.RetrieveAPIView):
     serializer_class = DocumentDetailSerializer
 
 class SearchView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         query = request.data.get("query", "").strip()
         
