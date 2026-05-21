@@ -101,7 +101,7 @@ class Chunk(models.Model):
 |--------|------|------|---------|
 | GET | `/api/documents/` | open | paginated list of documents (id, title, source_type, created_at, chunk count) |
 | GET | `/api/documents/<id>/` | open | document detail + nested chunks |
-| POST | `/api/search/` | TokenAuthentication required | body: `{"query": "..."}` → chunks where `content` icontains query, with document info |
+| POST | `/api/search/` | TokenAuthentication required | body: `{"query": "..."}` → `{query, total_matches, returned, capped_at, results: [chunks with document info]}`. Hard cap 50 results. Validates: query required, min 2 chars |
 | POST | `/api/auth/token/` | open | DRF's `obtain_auth_token` — body: `{"username", "password"}` → `{"token": "..."}` |
 
 ## Commit plan
@@ -113,8 +113,8 @@ Each step is one commit. Use these messages verbatim (clear history matters for 
 3. `Register Document and Chunk in Django admin` ← done
 4. `Add DRF serializers for documents and chunks` ← done
 5. `Add list and detail endpoints for documents` ← done
-6. `Add keyword search endpoint`
-7. `Add DRF TokenAuthentication for search endpoint`
+6. `Add keyword search endpoint` ← done
+7. `Add DRF TokenAuthentication for search endpoint` ← done
 8. `Add unit tests for endpoints and authentication`
 9. `Add README with setup instructions and curl examples`
 

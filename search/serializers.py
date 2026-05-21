@@ -7,6 +7,17 @@ class ChunkSerializer(serializers.ModelSerializer):
         fields = ['id', 'content', 'position']
         read_only_fields = ['id', 'content', 'position']
 
+class DocumentMiniSerializer(serializers.ModelSerializer):
+    source_type_display = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Document
+        fields = ['id', 'title', 'source_type', 'source_type_display']
+        read_only_fields = ['id', 'title', 'source_type', 'source_type_display']
+    
+    def get_source_type_display(self, obj):
+        return obj.get_source_type_display()
+
 class DocumentListSerializer(serializers.ModelSerializer):
     source_type_display = serializers.SerializerMethodField()
     chunk_count = serializers.SerializerMethodField()
@@ -36,3 +47,11 @@ class DocumentDetailSerializer(serializers.ModelSerializer):
     
     def get_source_type_display(self, obj):
         return obj.get_source_type_display()
+
+class SearchResultSerializer(serializers.ModelSerializer):
+    document = DocumentMiniSerializer(read_only=True)
+    
+    class Meta:
+        model = Chunk
+        fields = ['id', 'content', 'position', 'document']
+        read_only_fields = ['id', 'content', 'position', 'document']
