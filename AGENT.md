@@ -108,9 +108,9 @@ class Chunk(models.Model):
 
 Each step is one commit. Use these messages verbatim (clear history matters for the reviewer):
 
-1. `Initial Django project setup with DRF dependency` ← already done
-2. `Add Document and Chunk models with migrations`
-3. `Register Document and Chunk in Django admin`
+1. `Initial Django project setup with DRF dependency` ← done
+2. `Add Document and Chunk models with migrations` ← done
+3. `Register Document and Chunk in Django admin` ← done
 4. `Add DRF serializers for documents and chunks`
 5. `Add list and detail endpoints for documents`
 6. `Add keyword search endpoint`
