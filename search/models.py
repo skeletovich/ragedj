@@ -10,6 +10,9 @@ class Document(models.Model):
     source_type = models.CharField(max_length=20, choices=SOURCE_TYPES)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+
     def __str__(self):
         return f"{self.get_source_type_display()}: {self.title}"
 class Chunk(models.Model):

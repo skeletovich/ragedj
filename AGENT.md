@@ -111,8 +111,8 @@ Each step is one commit. Use these messages verbatim (clear history matters for 
 1. `Initial Django project setup with DRF dependency` ← done
 2. `Add Document and Chunk models with migrations` ← done
 3. `Register Document and Chunk in Django admin` ← done
-4. `Add DRF serializers for documents and chunks`
-5. `Add list and detail endpoints for documents`
+4. `Add DRF serializers for documents and chunks` ← done
+5. `Add list and detail endpoints for documents` ← done
 6. `Add keyword search endpoint`
 7. `Add DRF TokenAuthentication for search endpoint`
 8. `Add unit tests for endpoints and authentication`

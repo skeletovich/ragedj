@@ -20,6 +20,9 @@ class DocumentListSerializer(serializers.ModelSerializer):
         return obj.get_source_type_display()
     
     def get_chunk_count(self, obj):
+        # Check if chunk count is annotated (for performance optimization)
+        if hasattr(obj, '_chunk_count'):
+            return obj._chunk_count
         return obj.chunks.count()
 
 class DocumentDetailSerializer(serializers.ModelSerializer):
